@@ -1,0 +1,21 @@
+a) save the token locally (for example in a file or in SP):
+ 
+pro: Saving the token locally spares the server to generate the same token again and again in every launch of the app.
+Sparing the server to generate the same token over and over again saves server's computation time, which can be used to perform other tasks. 
+
+con: Saveing the token locally could be a security isssue, as a malware in an infected machine can steal the token and send it to an attacker.
+The attacker can use the stolen token to impersonate to the victim, loging into his account and perform actions on bahalf the victim.
+
+b) use this token only in this current app-launch, and re-request a token from the server each time the app launches again:
+ 
+pro: 
+Not saving the token on the local machine would make an attacker's life harder to impersonate other users and loging in to their accounts.
+Now in order to attack he would need to gain access to the server and steal the tokens from there - a difficult task if the server is secured and the tokens are stored
+hashed with salt mechanism.
+
+con: 
+Asking the server to send the token in each app lauch will could create heavy workload on the server and spend computation time.
+In every launch of the app, the server will need to seach for a specified username in his datasets, which takes time, to check if such user exists already or not.
+If exist, it need to dend him the stored token, which may be stored in different dataset - again a spend of time.
+If the user does not exist, it will generate a new token to send him - could create to heavy workload on th server, as many requests arrive simultaneously.
+ 
